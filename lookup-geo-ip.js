@@ -24,6 +24,13 @@ const server = http.createServer(async (req, res) => {
 <p>Hostname: ${hostname}</p>
 <p>Location: ${geo ? `${geo.city}, ${geo.region}, ${geo.country}` : 'Could not determine location'}</p>`;
 
+  // Log headers and their values
+  console.log('Headers:', req.headers);
+  output += `<h2>Headers</h2>`;
+  for (const [key, value] of Object.entries(req.headers)) {
+    output += `<p>${key}: ${value}</p>`;
+  }
+
   const forwardedIps = req.headers['x-forwarded-for'];
   if (forwardedIps) {
     const ips = forwardedIps.split(',').map(ip => ip.trim());
@@ -40,10 +47,9 @@ const server = http.createServer(async (req, res) => {
 
       forwardedGeo = geoip.lookup(forwardedIp);
 
-      output += `<h2>Forwarded IP Information</h2>
-      <p>Forwarded IP: ${forwardedIp}</p>
-      <p>Forwarded Hostname: ${forwardedHostname}</p>
-      <p>Forwarded Location: ${forwardedGeo ? `${forwardedGeo.city}, ${forwardedGeo.region}, ${forwardedGeo.country}` : 'Could not determine location'}</p>`;
+      output += `<p>Forwarded IP: ${forwardedIp}</p>
+<p>Forwarded Hostname: ${forwardedHostname}</p>
+<p>Forwarded Location: ${forwardedGeo ? `${forwardedGeo.city}, ${forwardedGeo.region}, ${forwardedGeo.country}` : 'Could not determine location'}</p>`;
     }
   }
 
@@ -51,6 +57,6 @@ const server = http.createServer(async (req, res) => {
   res.end(output);
 });
 
-server.listen(process.env.PORT || 3000, () => {
-  console.log(`Server listening on port ${process.env.PORT || 3000}`);
+server.listen(3000, () => {
+  console.log('Server listening on port 3000');
 });
