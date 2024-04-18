@@ -1,0 +1,18 @@
+# .gitignore
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore the npm global install symlink directory (contains installed global packages, including yarn)
+.npm/
+
+# Ignore .DS_Store files (created by macOS)
+.DS_Store
+
+# Ignore environment variables
+.env
