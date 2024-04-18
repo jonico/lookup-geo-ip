@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "node lookup-geo-ip.js"
+  },
   "dependencies": {
     "geoip-lite": "^1.4.10"
   }
